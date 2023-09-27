@@ -23,17 +23,24 @@ const TotalSlides = 11; // 전체 슬라이드 개수(총 11개. 배열로 계�
 export default function SliderComponent() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
+  
 
-//   useEffect(()=>{
-//     setInterval(()=>{
-//         if(currentSlide === images.length-1){
-//             setCurrentSlide(0);
-//             return;
-//         }
-//         setCurrentSlide(currentSlide + 1);
+  useEffect(()=>{
+    const id = setInterval(()=>{
+      setCurrentSlide((cnt)=>{
+        if(cnt == images.length - 1 ){
+          return 0
+        }
+        return cnt+1;
+      });
+    }, 5000);
 
-//     }, 2000)
-//   } ,[currentSlide]);
+    return ()=>{clearInterval(id)}
+
+
+  }, []);
+
+
   // Forward 버튼 클릭 시
   const forwardSlide = () =>{
     if(currentSlide >= images.length - 1) {
@@ -72,6 +79,7 @@ export default function SliderComponent() {
             (e)=><BannerImg src ={e} alt="banner"/>
         )}
         </BannerWrap>
+
     </SliderContainer>
   );
 }
