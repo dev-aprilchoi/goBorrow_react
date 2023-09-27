@@ -34,5 +34,5 @@ const SidebarComponent = () => {
             <div>TOP</div>
         </Sidebar>
     )
-}
+}  
 export default SidebarComponent;
