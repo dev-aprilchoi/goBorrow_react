@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import MyPostFooter from "../component/mypost/mypostfooter";
 import GoodsCondition from '../component/mypost/goodscondition';
 import ExchangeOption from '../component/mypost/exchange';
+import GoodsCategory from '../component/mypost/goodscategory';
 
 
 const PostsDiv = styled.div`
@@ -174,6 +175,7 @@ const ImgLiTag = styled.li`
 
 const Explaindiv = styled.div`
     margin-top: 20px;
+    margin-left: 34px;
     color: rgb(102, 102, 102);
     line-height: 180%;
     font-size: 14px;
@@ -188,7 +190,7 @@ const GoodsNameLiTag = styled.li`
 `;
 
 const GoodsNameDiv = styled.div`
-    width: 10.5rem;
+    width: 7.8rem;
     font-size: 18px;
     font-weight: 400;
     color: rgb(25, 25, 25);
@@ -305,6 +307,7 @@ const MyPostPage = () => {
                                     </InputDiv>
                                 </GoodsNameLiTag>
                             </UlTag>
+                            <GoodsCategory/>
                             <GoodsCondition/>
                             <ExchangeOption/>
                         </section>

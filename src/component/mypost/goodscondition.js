@@ -26,8 +26,6 @@ const InputDiv = styled.div`
 const labelStyle = {
     marginRight: '2rem',
     cursor: 'pointer',
-
-
 }
 
 const GoodsCondition = (props) => {
