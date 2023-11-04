@@ -12,7 +12,8 @@ const Layout = (props) => {
 }
 
 const Main = styled.main`
-    width:1000px;
+    /* display: block; */
+    width: 1024px;
     margin: 0 auto;
 `;
 

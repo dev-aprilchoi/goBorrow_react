@@ -5,8 +5,7 @@ const FooterDiv = styled.footer`
     height: 4.5rem;
     background: rgb(246, 246, 246);
     box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px;
-    /* position: absolute; */
-    left: 0px;
+    position: sticky;
     bottom: 0px;
     z-index: 10;
 `;
@@ -32,8 +31,6 @@ const SaveButton = styled.button`
     `;
 
 const PostButton = styled.button`
-    /* height: 3.5rem;
-    width: 10rem; */
     padding: 12px 38px;
     color: rgb(255, 255, 255);
     font-size: 18px;
