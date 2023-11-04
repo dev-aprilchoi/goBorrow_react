@@ -2,9 +2,10 @@ import styled from '@emotion/styled';
 import Layout from "../component/common/layout";
 import { Link } from 'react-router-dom';
 import MyPostFooter from "../component/mypost/mypostfooter";
-import GoodsCondition from '../component/mypost/goodscondition';
-import ExchangeOption from '../component/mypost/exchange';
+import StyledRadio from '../component/mypost/styledradio';
 import GoodsCategory from '../component/mypost/goodscategory';
+import Explanation from '../component/mypost/explanation';
+import TagSection from '../component/mypost/tag';
 
 
 const PostsDiv = styled.div`
@@ -40,7 +41,6 @@ const Firstheaddiv = styled.div`
     border-right: 1px solid rgb(210, 210, 210);
     margin-left: 2rem;
     }
-
 `;
 
 const Secondheaddiv = styled.div`
@@ -254,7 +254,6 @@ const MyPostPage = () => {
                         <Secondheaddiv>구매/판매내역</Secondheaddiv>
                     </NavDiv>
                 </HeadDiv>
-
                 <BodyDiv>
                     <Main>
                         <section>
@@ -294,7 +293,7 @@ const MyPostPage = () => {
                                                     style={linkStyle}
                                                 >거래금지 품목 보기</Link>
                                             </GoodsInputDiv>
-                                            <div 
+                                            <div
                                                 style={{
                                                     fontSize: '1rem',
                                                     textAlign: 'right',
@@ -307,16 +306,47 @@ const MyPostPage = () => {
                                     </InputDiv>
                                 </GoodsNameLiTag>
                             </UlTag>
-                            <GoodsCategory/>
-                            <GoodsCondition/>
-                            <ExchangeOption/>
+                            <GoodsCategory />
+                            <StyledRadio
+                                title="상품상태"
+                                optionList={['중고상품', '새상품']}
+                                name="goodsCondition"
+                                showRadio={true}
+                            />
+                            <StyledRadio
+                                title="교환"
+                                optionList={['불가', '가능']}
+                                name="exchangeOption"
+                                showRadio={true}
+                            />
+                            <StyledRadio
+                                title="가격"
+                                optionList={['배송비포함', '배송비별도']}
+                                name="priceOption"
+                                showInput={true}
+                                inputPlaceholder="숫자만 입력해 주세요."
+                                span="원"
+                                showRadio={true}
+                            />
+                            <Explanation />
+                            <TagSection />
+                            <StyledRadio
+                                title="수량"
+                                name="quantity"
+                                showInput={true}
+                                inputName="quantity"
+                                inputPlaceholder="수량을 입력해 주세요."
+                                span="개"
+                                showRadio={false}
+                            />
+
                         </section>
                         {/* <section>
                             빠른판매부터
                         </section> */}
                     </Main>
-                  <MyPostFooter/>
                 </BodyDiv>
+                <MyPostFooter />
             </PostsDiv>
         </Layout>
     );
