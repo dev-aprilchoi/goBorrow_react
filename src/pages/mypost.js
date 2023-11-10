@@ -6,6 +6,7 @@ import StyledRadio from '../component/mypost/styledradio';
 import GoodsCategory from '../component/mypost/goodscategory';
 import Explanation from '../component/mypost/explanation';
 import TagSection from '../component/mypost/tag';
+import { useState } from 'react';
 
 
 const PostsDiv = styled.div`
@@ -242,8 +243,54 @@ const linkStyle = {
     lineHeight: '125%',
     textDecoration: 'underline',
 };
+const ErrMsg = styled.p`
+    color: rgb(245, 126, 0);
+    font-size: 14px;
+    margin-top: 0.5rem;
+
+`
 
 const MyPostPage = () => {
+    const [img, setImg] = useState(null);
+    const [goodsName, setGoodsName] = useState('');
+    const [goodsCategory, setGoodsCategory] = useState('');
+    const [priceOption, setPriceOption] = useState('');
+    const [explanation, setExplanation] = useState('');
+    const [tag, setTag] = useState('');
+    const [quantity, setQuantity] = useState('');
+
+    const [goodsErrMsg, setGoodsErrMsg] = useState('');
+
+
+    const GoodsNameInputHandler = (e) => {
+        setGoodsName(e.target.value);
+
+        const goodsNameInput = e.target.value;
+        if (goodsNameInput.length === 1) {
+            setGoodsErrMsg('상품명을 입력해 주세요.');
+        } else if (goodsNameInput.length >= 40) {
+            setGoodsName(goodsNameInput);
+            setGoodsErrMsg('40자 이내로 입력해 주세요.');
+        } else {
+            setGoodsErrMsg('');
+        }
+
+    }
+
+
+    // const GoodsQuantityInputHandler = (e) => {
+    //     const quantity = e.target.value;
+    //     console.log(quantity);
+        // if (isNaN(quantity)) {
+        //     alert('가격을 입력해 주세요.');
+        //     return;
+        // } else if (quantity.length > 4) {
+        //     alert('5자 이내로 입력해 주세요.');
+        // } else {
+        //     setQuantity(quantity);
+        // }
+    // }
+
     return (
         <Layout>
             <PostsDiv>
@@ -288,7 +335,11 @@ const MyPostPage = () => {
                                     <InputDiv>
                                         <InputInsideDiv>
                                             <GoodsInputDiv>
-                                                <GoodsInput type="text" placeholder="상품명을 입력해 주세요." />
+                                                <GoodsInput
+                                                    type="text"
+                                                    onChange={GoodsNameInputHandler} placeholder="상품명을 입력해 주세요."
+                                                    maxLength={40}
+                                                />
                                                 <Link to="/prohibitelists"
                                                     style={linkStyle}
                                                 >거래금지 품목 보기</Link>
@@ -300,9 +351,14 @@ const MyPostPage = () => {
                                                     marginLeft: '1.5rem',
                                                 }}
                                             >
-                                                0/40
+                                                {goodsName.length}/40
                                             </div>
                                         </InputInsideDiv>
+                                        <div>
+                                            <ErrMsg>
+                                                {goodsErrMsg}
+                                            </ErrMsg>
+                                        </div>
                                     </InputDiv>
                                 </GoodsNameLiTag>
                             </UlTag>
@@ -324,9 +380,11 @@ const MyPostPage = () => {
                                 optionList={['배송비포함', '배송비별도']}
                                 name="priceOption"
                                 showInput={true}
-                                inputPlaceholder="숫자만 입력해 주세요."
+                                inputPlaceholder="가격만 입력해 주세요."
                                 span="원"
                                 showRadio={true}
+                            // onChange={GoodsPriceInputHandler}
+
                             />
                             <Explanation />
                             <TagSection />
@@ -339,7 +397,6 @@ const MyPostPage = () => {
                                 span="개"
                                 showRadio={false}
                             />
-
                         </section>
                         {/* <section>
                             빠른판매부터
@@ -351,5 +408,6 @@ const MyPostPage = () => {
         </Layout>
     );
 }
+
 
 export default MyPostPage;
