@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const CategoryLiTag = styled.li`
     display: flex;
@@ -50,6 +50,12 @@ const categoryLists = {
 
 const CategoryUlTag = styled.ul`
     padding: 0.5rem 0px;
+`;
+
+const ErrMsg = styled.p`
+    color: rgb(245, 126, 0);
+    font-size: 14px;
+    margin-top: 0.5rem;
 `;
 
 const FirstCategoryList = [
@@ -156,6 +162,22 @@ const FirstCategoryList = [
     {
         id: 26,
         name: '원룸/함께살아요',
+    },
+    {
+        id: 27,
+        name: '번개나눔',
+    },
+    {
+        id: 28,
+        name: '구인구직',
+    },
+    {
+        id: 29,
+        name: '재능',
+    },
+    {
+        id: 30,
+        name: '커뮤니티',
     },
 ];
 
@@ -324,7 +346,7 @@ const firstAndSecondLevelCategories = [
                 { id: 4, name: '솔로(여)', },
                 { id: 5, name: '배우(남)', },
                 { id: 6, name: '배우(여)', },
-                { id: 6, name: '방송/예능/캐릭터', },
+                { id: 7, name: '방송/예능/캐릭터', },
             ]
     },
     {
@@ -337,10 +359,117 @@ const firstAndSecondLevelCategories = [
                 { id: 4, name: 'RC/드론', },
                 { id: 5, name: '보드게임', },
                 { id: 6, name: '서바이벌건', },
-                { id: 6, name: '기타(키덜트)', },
+                { id: 7, name: '기타(키덜트)', },
             ]
     },
-
+    {
+        firstCategoryId: 14,
+        secondCategory:
+            [
+                { id: 1, name: '골동품', },
+                { id: 2, name: '예술작품', },
+            ]
+    },
+    {
+        firstCategoryId: 15,
+        secondCategory:
+            [
+                { id: 1, name: '악기', }
+            ]
+    },
+    {
+        firstCategoryId: 16,
+        secondCategory:
+            [
+                { id: 1, name: '문구', },
+                { id: 2, name: '기프트콘/쿠폰', },
+                { id: 3, name: '상품권', },
+                { id: 4, name: '티켓', },
+            ]
+    },
+    {
+        firstCategoryId: 17,
+        secondCategory:
+            [
+                { id: 1, name: '스킨케어', },
+                { id: 2, name: '색조메이크업', },
+                { id: 3, name: '베이스메이크업', },
+                { id: 4, name: '바디/헤어케어', },
+                { id: 5, name: '향수/아로마', },
+                { id: 6, name: '네일아트/케어', },
+                { id: 7, name: '미용소품/기기', },
+                { id: 8, name: '다이어트/이너뷰티', },
+                { id: 9, name: '남성 화장품', },
+            ]
+    },
+    {
+        firstCategoryId: 18,
+        secondCategory:
+            [
+                { id: 1, name: '가구', },
+                { id: 2, name: '침구', },
+                { id: 3, name: '수공예/수선', },
+                { id: 4, name: '셀프 인테리어 용품', },
+                { id: 5, name: '인테리어 소품', },
+                { id: 6, name: '꽃/원예', },
+                { id: 7, name: '조명', },
+                { id: 8, name: '카페트/러그/매트', },
+                { id: 9, name: '커튼/블라인드', },
+            ]
+    },
+    {
+        firstCategoryId: 19,
+        secondCategory:
+            [
+                { id: 1, name: '주방용품', },
+                { id: 2, name: '욕실용품', },
+                { id: 3, name: '생활용품', },
+            ]
+    },
+    {
+        firstCategoryId: 20,
+        secondCategory:
+            [
+                { id: 1, name: '드릴/전동공구', },
+                { id: 2, name: '수공수/가정용 공구 ', },
+                { id: 3, name: '공구함', },
+                { id: 4, name: '산업용품/자재', },
+                { id: 5, name: '측정/계측/레벨', },
+                { id: 6, name: '공장기계/용접/가스', },
+                { id: 7, name: '에어/유압공구', },
+                { id: 8, name: '기타 산업용품', },
+            ]
+    },
+    {
+        firstCategoryId: 21,
+        secondCategory:
+            [
+                { id: 1, name: '농수축산물', },
+                { id: 2, name: '간식', },
+                { id: 3, name: '커피/차', },
+                { id: 4, name: '생수/음료', },
+                { id: 5, name: '면/통조림', },
+                { id: 6, name: '장/소스/오일', },
+                { id: 7, name: '간편조리식품', },
+                { id: 8, name: '기타 식품', },
+            ]
+    },
+    {
+        firstCategoryId: 22,
+        secondCategory:
+            [
+                { id: 1, name: '베이비의류(0-2세)', },
+                { id: 2, name: '여아의류(3-6세)', },
+                { id: 3, name: '남아의류(3-6세)', },
+                { id: 4, name: '여주니어의류(7세)', },
+                { id: 5, name: '남주니어의류(7세)', },
+                { id: 6, name: '신발/가방/잡화', },
+                { id: 7, name: '유아동용품', },
+                { id: 8, name: '임부 의류/용품', },
+                { id: 8, name: '교구/완구/인형', },
+                { id: 8, name: '수유/이유용품', },
+            ]
+    },
 ];
 
 const secondAndThirdLevelCategories = [
@@ -418,18 +547,11 @@ const SecondCategoryDiv = styled.div`
 const ThirdCategoryDiv = styled.div`
     width: 284px;
     display: flex;
-    align-items: center;
-    justify-content: center;
     overflow-y: auto;
     font-size: 16px;
     font-weight: 400;
-    color: rgb(153, 153, 153);
     border-left: 1px solid rgb(204, 204, 204);
 `;
-
-const ChooseDiv = styled.div`
-    margin-top: 1.5rem;
-    `;
 
 const GoodsCategory = () => {
     const [userClicked, setUserClicked] = useState(false);
@@ -437,21 +559,45 @@ const GoodsCategory = () => {
     const [secondCategoryList, setSecondCategoryList] = useState(null);
     const [selectedSecondCategory, setSelectedSecondCategory] = useState(null);
     const [thirdCategoryList, setThirdCategoryList] = useState(null);
+    const [selectedThirdCategory, setSelectedThirdCategory] = useState(null);
+    const [selectedLast, setSelectedLast] = useState(null);
+
+    const [selectedCategoryColor, setSelectedCategoryColor] = useState(null);
+
+    const categoryErrMsg = '상세 카테고리를 선택해 주세요.';
 
     const handleFirstCategoryClick = (category) => {
         setSelectedFirstCategory(category);
         setUserClicked(true);
         setSecondCategoryList(firstAndSecondLevelCategories.filter((e) => e.firstCategoryId === category.id)[0].secondCategory);
+        setSelectedSecondCategory(null);
+        setSelectedThirdCategory(null);
+        setSelectedCategoryColor(category.name);
     };
 
     const handleSecondCategoryClick = (category) => {
-        // console.log(category);
-        console.log(selectedSecondCategory);
         setSelectedSecondCategory(category);
         setUserClicked(true);
         setThirdCategoryList(secondAndThirdLevelCategories.filter((e) => e.secondCategoryId === category.id)[0].thirdCategory);
-        console.log(thirdCategoryList);
+        setSelectedThirdCategory(null);
+        setSelectedCategoryColor(category.name);
     }
+
+    const handleThirdCategoryClick = (category) => {
+        setSelectedThirdCategory(category);
+        setUserClicked(true);
+        setSelectedLast(null);
+        setSelectedCategoryColor(category.name);
+    }
+
+
+
+
+    useEffect(() => {
+        // This effect will run after selectedCategoryColor has been updated
+        console.log(selectedCategoryColor, 'selectedCategoryColor');
+        // You can perform any actions here that depend on selectedCategoryColor
+    }, [selectedCategoryColor]);
 
     return (
         <CategoryLiTag>
@@ -469,7 +615,10 @@ const GoodsCategory = () => {
                                     onClick={() => handleFirstCategoryClick(category)}
                                 >
                                     <input
-                                        style={categoryButtons}
+                                        style={{
+                                            ...categoryButtons,
+                                            color: selectedCategoryColor === category.name && 'rgb(216, 12, 24)',
+                                        }}
                                         type="button"
                                         value={category.name}
                                     />
@@ -487,7 +636,10 @@ const GoodsCategory = () => {
                                         onClick={() => handleSecondCategoryClick(category)}
                                     >
                                         <input
-                                            style={categoryButtons}
+                                            style={{
+                                                ...categoryButtons,
+                                                color: selectedCategoryColor === category.name && 'rgb(216, 12, 24)',
+                                            }}
                                             type="button"
                                             value={category.name}
                                         />
@@ -513,18 +665,78 @@ const GoodsCategory = () => {
                             </div>
                         )}
                     </SecondCategoryDiv>
-                    <ThirdCategoryDiv>소분류 선택</ThirdCategoryDiv>
+                    <ThirdCategoryDiv>
+                        {userClicked && selectedSecondCategory ? (
+                            <CategoryUlTag>
+                                {thirdCategoryList.map((category, index) => (
+                                    <li
+                                        style={categoryLists}
+                                        key={index}
+                                        onClick={() => handleThirdCategoryClick(category)}
+                                    >
+                                        <input
+                                            style={{
+                                                ...categoryButtons,
+                                                color: selectedCategoryColor === category.name && 'rgb(216, 12, 24)',
+                                            }}
+                                            type="button"
+                                            value={category.name}
+                                        />
+                                    </li>
+                                ))}
+                            </CategoryUlTag>
+                        ) : (
+                            <div
+                                style={{
+                                    width: '284px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    overflowY: 'auto',
+                                    fontSize: '16px',
+                                    fontWeight: '400',
+                                    color: 'rgb(153, 153, 153)',
+                                    borderLeft: '1px solid rgb(204, 204, 204)',
+                                }}
+                            >
+                                소분류 선택
+                            </div>
+                        )
+                        }
+                    </ThirdCategoryDiv>
                 </CategoryBoxDiv>
-                <ChooseDiv>
-                    <h3
+                <div>
+                    <div>
+                        <div>
+                            <ErrMsg>
+                                {userClicked && !selectedThirdCategory && categoryErrMsg}
+                            </ErrMsg>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div>
+                    <span
                         style={{
-                            fontSize: '16px',
-                            fontWeight: '400',
-                            color: 'rgb(216, 12, 24)'
+                            color: 'rgb(216, 12, 24)',
+                            marginRight: '0.3rem'
                         }}
-                    > 선택한 카테고리:
-                    </h3>
-                </ChooseDiv>
+                    >
+                        선택한 카테고리:
+                    </span>
+                    <span
+                        style={{
+                            color: 'rgb(216, 12, 24)',
+                            fontWeight: 'bold'
+                        }}
+                    >
+                        {selectedFirstCategory && selectedFirstCategory.name}
+                        {selectedSecondCategory && ` > ${selectedSecondCategory.name}`}
+                        {selectedThirdCategory && ` > ${selectedThirdCategory.name}`}
+                        {selectedLast && ` > ${selectedLast && selectedLast.name}`}
+                    </span>
+                </div>
             </CardDiv>
         </CategoryLiTag >
     );
@@ -532,3 +744,9 @@ const GoodsCategory = () => {
 
 
 export default GoodsCategory;
+
+// 스페이스가 생기면 ui로 생긴거로 바뀌기하고 
+//map li 태그를 사용 하면됨
+
+
+//카테고리는 userclicked가 필요없음  그냥 바로 selectedFirstCategory 가 클릭되면, 

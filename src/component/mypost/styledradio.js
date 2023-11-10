@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useState } from 'react';
 
 const StyledRadioLi = styled.li`
     display: flex;
@@ -43,7 +44,30 @@ const PriceInput = styled.input`
     color: rgb(153, 153, 153);
     border-radius: 2px;
 `;
+
+const ErrMsg = styled.p`
+    color: rgb(245, 126, 0);
+    font-size: 14px;
+    margin-top: -0.5rem;
+`
 const GoodsCondition = (props) => {
+    const [priceErrMsg, setPriceErrMsg] = useState('');
+    const [price, setPrice] = useState('');
+
+    const GoodsPriceInputHandler = (e) => {
+        const rawPrice = e.target.value;
+        const numericPrice = rawPrice.replace(/\D/g, '');
+
+        if (isNaN(numericPrice)) {
+            setPriceErrMsg('숫자만 입력해 주세요.');
+            setPrice('');
+        } else {
+            const formattedPrice = numericPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            setPriceErrMsg('');
+            setPrice(formattedPrice);
+        }
+    }
+
     return (
         <>
             <StyledRadioLi>
@@ -55,9 +79,15 @@ const GoodsCondition = (props) => {
                     {props.showInput && (
                         <div>
                             <PriceInput
+                                value={price}
                                 type="text"
+                                maxLength={props.name === 'quantity' ? 3 : 11}
                                 name={props.inputName}
                                 placeholder={props.inputPlaceholder}
+                                onChange={props.onChange
+                                    ? props.onChange
+                                    : GoodsPriceInputHandler
+                                }
                             >
                             </PriceInput>
                             <span
@@ -65,7 +95,13 @@ const GoodsCondition = (props) => {
                                     color: 'rgb(153, 153, 153)',
                                 }}
                             >{props.span}</span>
+                            <div>
+                                <ErrMsg>
+                                    {priceErrMsg}
+                                </ErrMsg>
+                            </div>
                         </div>
+
                     )}
 
                     {props.showRadio && (
